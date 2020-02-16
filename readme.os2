@@ -1,0 +1,37 @@
+CircleMUD 2.2 for OS/2 - ported by Clayton O'Neill
+
+This is a straight forward port of CircleMUD to OS/2.  What follows is general
+notes on usage.
+
+  IBM TCP/IP 2.0 Base Kit is required.  The 1.2 and 1.21 kits may work, but
+CircleMUD was compiled with the 32-bit libraries so it will at least have to
+be recompiled.
+
+  To recompile you will need to have the TCP/IP PDK installed and also have
+IBM C Set/2 installed.  The OS/2 Toolkit is not required.
+
+  The autowiz program is not automatically called like is described in the
+docs.  This could be easily added and probably will be if someone asks.
+
+  All of the shell scripts that were included in the original CircleMUD
+distribution have been converted to REXX scripts with the same name.
+The original utilities are included in case you have a problem with the
+REXX versions.  All of the scripts have not been tested and may not work, but
+should.
+
+  Included additionally is a touch program that is required for some of the
+shutdown options to work.  This will be automatically made by makefile.os2
+and the binary is included in the bin directory.  Because of this the bin
+directory should be in your path so that it can be found.
+
+  If you are contemplating recompiling the source (Hopefully you are if you
+really want to run a MUD) then you will need to have NMAKE (Included in the
+OS/2 2.0 and greater Toolkit).  The makefile for the OS/2 version of CircleMUD
+is in the src directory and is called Makefile.OS2
+
+  If you actually do use this or if you have any questions about the code please
+feel free to drop me a line.  I don't plan on further development of this unless
+someone asks (I'm not running a mud, I was just bored and ported it:).
+
+Clayton O'Neill
+coneil@symantec.com

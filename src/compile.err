@@ -1,0 +1,70 @@
+
+Operating System/2 Program Maintenance Utility
+Version 2.001.000 Feb 16 1993
+Copyright (C) IBM Corporation 1988-1993
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+	nmake -F makefile.os2 ../bin/circle
+
+Operating System/2 Program Maintenance Utility
+Version 2.001.000 Feb 16 1993
+Copyright (C) IBM Corporation 1988-1993
+Copyright (C) Microsoft Corp. 1988-1991
+All rights reserved.
+
+	icc -Fe../bin/circle /G4 /Gd+ /Ge /Re /Se   -DOS2 /Q /O /Os+ comm.obj act.comm.obj act.informative.obj act.movement.obj  act.obj1.obj act.obj2.obj act.offensive.obj act.other.obj act.social.obj  act.wizard.obj handler.obj db.obj interpreter.obj utility.obj  spec_assign.obj shop.obj limits.obj mobact.obj fight.obj modify.obj  weather.obj spell_parser.obj spells1.obj spells2.obj constants.obj  spec_procs.obj signals.obj objsave.obj boards.obj magic.obj mail.obj  castle.obj ban.obj graph.obj config.obj SO32DLL.LIB TCP32DLL.LIB
+Object Modules [.obj]: /pmtype:vio /nologo /noi /align:16 /exepack /base:65536 +
+Object Modules [.obj]: "comm.obj" +
+Object Modules [.obj]: "act.comm.obj" +
+Object Modules [.obj]: "act.informative.obj" +
+Object Modules [.obj]: "act.movement.obj" +
+Object Modules [.obj]: "act.obj1.obj" +
+Object Modules [.obj]: "act.obj2.obj" +
+Object Modules [.obj]: "act.offensive.obj" +
+Object Modules [.obj]: "act.other.obj" +
+Object Modules [.obj]: "act.social.obj" +
+Object Modules [.obj]: "act.wizard.obj" +
+Object Modules [.obj]: "handler.obj" +
+Object Modules [.obj]: "db.obj" +
+Object Modules [.obj]: "interpreter.obj" +
+Object Modules [.obj]: "utility.obj" +
+Object Modules [.obj]: "spec_assign.obj" +
+Object Modules [.obj]: "shop.obj" +
+Object Modules [.obj]: "limits.obj" +
+Object Modules [.obj]: "mobact.obj" +
+Object Modules [.obj]: "fight.obj" +
+Object Modules [.obj]: "modify.obj" +
+Object Modules [.obj]: "weather.obj" +
+Object Modules [.obj]: "spell_parser.obj" +
+Object Modules [.obj]: "spells1.obj" +
+Object Modules [.obj]: "spells2.obj" +
+Object Modules [.obj]: "constants.obj" +
+Object Modules [.obj]: "spec_procs.obj" +
+Object Modules [.obj]: "signals.obj" +
+Object Modules [.obj]: "objsave.obj" +
+Object Modules [.obj]: "boards.obj" +
+Object Modules [.obj]: "magic.obj" +
+Object Modules [.obj]: "mail.obj" +
+Object Modules [.obj]: "castle.obj" +
+Object Modules [.obj]: "ban.obj" +
+Object Modules [.obj]: "graph.obj" +
+Object Modules [.obj]: "config.obj"
+Run File [comm.exe]: "D:\tmp\tmp\bin\circle.exe"
+List File [nul.map]: 
+Libraries [.lib]: "SO32DLL.LIB" +
+Libraries [.lib]: "TCP32DLL.LIB"
+Definitions File [nul.def]: 
+
+mail.obj(mail.c) :  error L2029: 'fseek' : unresolved external
+db.obj(db.c) :  error L2029: 'fseek' : unresolved external
+act.wizard.obj(act.wizard.c) :  error L2029: 'fseek' : unresolved external
+act.informative.obj(act.informative.c) :  error L2029: 'fseek' : unresolved external
+ban.obj(ban.c) :  error L2029: 'rewind' : unresolved external
+objsave.obj(objsave.c) :  error L2029: 'rewind' : unresolved external
+db.obj(db.c) :  error L2029: 'rewind' : unresolved external
+mail.obj(mail.c) :  error L2029: 'ftell' : unresolved external
+modify.obj(modify.c) :  error L2029: 'ftell' : unresolved external
+db.obj(db.c) :  error L2029: 'ftell' : unresolved external
+objsave.obj(objsave.c) :  error L2029: 'ferror' : unresolved external
+ban.obj(ban.c) :  error L2029: '_f

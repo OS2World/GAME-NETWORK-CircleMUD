@@ -1,0 +1,220 @@
+#compiler name
+CC = icc
+
+#compiler flags you want to use (other than profiling, such as -Wall)
+MYFLAGS =
+
+#flags for profiling (see hacker.doc for more information)
+PROFILE = 
+
+#remove the hash marks below if compiling under AIX
+#CC = cc
+#COMMFLAGS = -D_BSD
+
+#remove the hash mark below if compiling under SVR4
+#OSFLAGS = -DSVR4
+#LIBS = -lsocket -lnsl
+
+#remove the has mark below if compiling under IRIX
+#LIBS = -lmalloc
+
+#remove the hash mark below if compiling under Linux
+#OSFLAGS = -DLINUX
+
+#remove the hash mark below if compiling under OS/2
+OSFLAGS = -DOS2 /Q /Gm+ /O
+LIBS = SO32DLL.LIB TCP32DLL.LIB
+LFLAGS = /G4 /Gd+ /Ge /Re /Se
+MAKE = nmake -F makefile.os2
+
+#############################################################################
+
+CFLAGS = $(MYFLAGS) $(PROFILE) $(OSFLAGS)
+
+OBJFILES = comm.obj act.comm.obj act.informative.obj act.movement.obj \
+    act.obj1.obj act.obj2.obj act.offensive.obj act.other.obj act.social.obj \
+    act.wizard.obj handler.obj db.obj interpreter.obj utility.obj \
+    spec_assign.obj shop.obj limits.obj mobact.obj fight.obj modify.obj \
+    weather.obj spell_parser.obj spells1.obj spells2.obj constants.obj \
+    spec_procs.obj signals.obj objsave.obj boards.obj magic.obj mail.obj \
+    castle.obj ban.obj graph.obj config.obj
+
+../bin/circle : $(OBJFILES)
+
+utils:
+	$(MAKE) ../bin/autowiz
+	$(MAKE) ../bin/delobjs
+	$(MAKE) ../bin/hasmail
+	$(MAKE) ../bin/listrent
+	$(MAKE) ../bin/mailindex
+	$(MAKE) ../bin/mudpasswd
+	$(MAKE) ../bin/purgeplay
+	$(MAKE) ../bin/readmail
+	$(MAKE) ../bin/showplay
+	$(MAKE) ../bin/sign
+	$(MAKE) ../bin/split
+	$(MAKE) ../bin/syntax_check
+    $(MAKE) ../bin/touch
+
+all:
+	$(MAKE) ../bin/circle
+	$(MAKE) utils
+
+circle:
+	$(MAKE) ../bin/circle
+autowiz:
+	$(MAKE) ../bin/autowiz
+delobjs:
+	$(MAKE) ../bin/delobjs
+hasmail:
+	$(MAKE) ../bin/hasmail
+listrent:
+	$(MAKE) ../bin/listrent
+mailindex:
+	$(MAKE) ../bin/mailindex
+mudpasswd:
+	$(MAKE) ../bin/mudpasswd
+purgeplay:
+	$(MAKE) ../bin/purgeplay
+readmail:
+	$(MAKE) ../bin/readmail
+showplay:
+	$(MAKE) ../bin/showplay
+sign:
+	$(MAKE) ../bin/sign
+split:
+	$(MAKE) ../bin/split
+syntax_check:
+	$(MAKE) ../bin/syntax_check
+touch:
+    $(MAKE) ../bin/touch
+
+../bin/autowiz : util/autowiz.c structs.h db.h utils.h
+    $(CC) $(CFLAGS) -Fe../bin/autowiz util/autowiz.c 
+../bin/delobjs : util/delobjs.c structs.h
+    $(CC) $(CFLAGS) -Fe../bin/delobjs util/delobjs.c
+../bin/hasmail : util/hasmail.c mail.h
+    $(CC) $(CFLAGS) -Fe../bin/hasmail util/hasmail.c
+../bin/listrent : util/listrent.c structs.h
+    $(CC) $(CFLAGS) -Fe../bin/listrent util/listrent.c
+../bin/mailindex : util/mailindex.c mail.h
+    $(CC) $(CFLAGS) -Fe../bin/mailindex util/mailindex.c
+../bin/mudpasswd   : util/mudpasswd.c structs.h
+    $(CC) $(CFLAGS) -Fe../bin/mudpasswd util/mudpasswd.c
+../bin/purgeplay : util/purgeplay.c structs.h
+    $(CC) $(CFLAGS) -Fe../bin/purgeplay util/purgeplay.c
+../bin/readmail : util/readmail.c mail.h
+    $(CC) $(CFLAGS) -Fe../bin/readmail util/readmail.c
+../bin/showplay : util/showplay.c structs.h
+    $(CC) $(CFLAGS) -Fe../bin/showplay util/showplay.c
+../bin/sign: util/sign.c
+    $(CC) $(CFLAGS) -Fe../bin/sign $(COMMFLAGS) util/sign.c $(LIBS)
+../bin/split: util/split.c
+    $(CC) $(CFLAGS) -Fe../bin/split util/split.c
+../bin/syntax_check: util/syntax_check.c structs.h utils.h db.h comm.h \
+	handler.h limits.h
+    $(CC) $(CFLAGS) -Fe../bin/syntax_check util/syntax_check.c
+../bin/touch: util/touch.c
+    $(CC) $(CFLAGS) -Fe../bin/touch util/touch.c
+
+clean:
+    del *.obj
+
+# Dependencies for the main mud
+
+comm.obj : comm.c structs.h utils.h comm.h interpreter.h handler.h db.h \
+	limits.h
+    $(CC) /C $(CFLAGS) $(COMMFLAGS) comm.c
+act.comm.obj : act.comm.c structs.h utils.h comm.h interpreter.h handler.h \
+	db.h screen.h
+    $(CC) /C $(CFLAGS) act.comm.c
+act.informative.obj : act.informative.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h limits.h screen.h
+    $(CC) /C $(CFLAGS) act.informative.c
+act.movement.obj : act.movement.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h
+    $(CC) /C $(CFLAGS) act.movement.c
+act.obj1.obj : act.obj1.c structs.h utils.h comm.h interpreter.h handler.h \
+	db.h spells.h
+    $(CC) /C $(CFLAGS) act.obj1.c
+act.obj2.obj : act.obj2.c structs.h utils.h comm.h interpreter.h handler.h \
+	db.h spells.h limits.h
+    $(CC) /C $(CFLAGS) act.obj2.c
+act.offensive.obj : act.offensive.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h limits.h
+    $(CC) /C $(CFLAGS) act.offensive.c
+act.other.obj : act.other.c structs.h utils.h comm.h interpreter.h handler.h \
+	db.h spells.h screen.h limits.h
+    $(CC) /C $(CFLAGS) act.other.c
+act.social.obj : act.social.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h
+    $(CC) /C $(CFLAGS) act.social.c
+act.wizard.obj : act.wizard.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h limits.h screen.h
+    $(CC) /C $(CFLAGS) act.wizard.c
+handler.obj : handler.c structs.h utils.h comm.h db.h handler.h interpreter.h
+    $(CC) /C $(CFLAGS) handler.c
+db.obj : db.c structs.h utils.h db.h comm.h handler.h limits.h spells.h \
+	mail.h interpreter.h
+    $(CC) /C $(CFLAGS) db.c
+ban.obj : ban.c structs.h utils.h comm.h interpreter.h handler.h db.h
+    $(CC) /C $(CFLAGS) ban.c
+interpreter.obj : interpreter.c structs.h comm.h interpreter.h db.h utils.h \
+	limits.h spells.h handler.h mail.h screen.h
+    $(CC) /C $(CFLAGS) interpreter.c
+utility.obj : utility.c structs.h utils.h comm.h screen.h
+    $(CC) /C $(CFLAGS) utility.c
+spec_assign.obj : spec_assign.c structs.h db.h interpreter.h utils.h
+    $(CC) /C $(CFLAGS) spec_assign.c
+spec_procs.obj : spec_procs.c structs.h utils.h comm.h interpreter.h \
+	handler.h db.h spells.h limits.h
+    $(CC) /C $(CFLAGS) spec_procs.c
+castle.obj : castle.c structs.h utils.h comm.h interpreter.h handler.h \
+	db.h spells.h limits.h
+    $(CC) /C $(CFLAGS) castle.c
+limits.obj : limits.c structs.h limits.h utils.h spells.h comm.h db.h handler.h
+    $(CC) /C $(CFLAGS) limits.c
+fight.obj : fight.c structs.h utils.h comm.h handler.h interpreter.h db.h \
+	spells.h limits.h screen.h
+    $(CC) /C $(CFLAGS) fight.c
+weather.obj : weather.c structs.h utils.h comm.h handler.h interpreter.h db.h
+    $(CC) /C $(CFLAGS) weather.c
+shop.obj : shop.c structs.h comm.h handler.h db.h interpreter.h utils.h
+    $(CC) /C $(CFLAGS) shop.c
+spells1.obj : spells1.c structs.h utils.h comm.h db.h interpreter.h spells.h \
+	handler.h
+    $(CC) /C $(CFLAGS) spells1.c
+spells2.obj : spells2.c structs.h utils.h comm.h db.h interpreter.h spells.h \
+	handler.h
+    $(CC) /C $(CFLAGS) spells2.c
+magic.obj : magic.c structs.h utils.h comm.h spells.h handler.h limits.h \
+	interpreter.h db.h
+    $(CC) /C $(CFLAGS) magic.c
+spell_parser.obj : spell_parser.c structs.h utils.h comm.h db.h interpreter.h \
+	spells.h handler.h
+    $(CC) /C $(CFLAGS) spell_parser.c
+mobact.obj : mobact.c utils.h structs.h db.h comm.h interpreter.h handler.h
+    $(CC) /C $(CFLAGS) mobact.c
+modify.obj : modify.c structs.h utils.h interpreter.h handler.h db.h comm.h \
+	mail.h
+    $(CC) /C $(CFLAGS) modify.c
+constants.obj : constants.c structs.h limits.h
+    $(CC) /C $(CFLAGS) constants.c
+objsave.obj : objsave.c structs.h comm.h handler.h db.h interpreter.h \
+	utils.h spells.h
+    $(CC) /C $(CFLAGS) objsave.c
+boards.obj : boards.c structs.h utils.h comm.h db.h boards.h interpreter.h \
+	handler.h
+    $(CC) /C $(CFLAGS) boards.c
+mail.obj : mail.c mail.h structs.h utils.h comm.h db.h interpreter.h handler.h
+    $(CC) /C $(CFLAGS) mail.c
+signals.obj : signals.c utils.h structs.h
+    $(CC) /C $(CFLAGS) signals.c
+graph.obj : graph.c structs.h utils.h comm.h interpreter.h handler.h db.h \
+	spells.h
+    $(CC) /C $(CFLAGS) graph.c
+config.obj : config.c structs.h
+    $(CC) /C $(CFLAGS) config.c
+../bin/circle :
+    $(CC) -Fe../bin/circle $(LFLAGS) $(CFLAGS) $(OBJFILES) $(LIBS)
+

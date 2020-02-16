@@ -1,0 +1,5 @@
+"..\..\bin\listrent A-E\* | find" ARG(1)
+"..\..\bin\listrent F-J\* | find" ARG(1) 
+"..\..\bin\listrent K-O\* | find" ARG(1)
+"..\..\bin\listrent P-T\* | find" ARG(1)
+"..\..\bin\listrent U-Z\* | find" ARG(1)
